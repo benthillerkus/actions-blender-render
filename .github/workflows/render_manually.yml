@@ -45,13 +45,16 @@ jobs:
     - uses: actions/checkout@v2
       with:
         lfs: true
+        
+    - name: Create render directory
+      run: mkdir render
       
     - name: Render
-      run: blender -b ${{ github.event.inputs.file }}.blend -E CYCLES -f ${{ github.event.inputs.frame }} -F ${{ github.event.inputs.format }} -x 1
+      run: blender -b -x 1 -o //render/frame-### ${{ github.event.inputs.file }}.blend -E CYCLES -f ${{ github.event.inputs.frame }} -F ${{ github.event.inputs.format }}
       
     - name: Upload output file
       uses: actions/upload-artifact@v2
       with:
         name: ${{ github.event.inputs.file }}
-        path: /tmp/
+        path: render
       
