@@ -42,8 +42,10 @@ jobs:
     - name: Install Blender
       run: sudo apt install blender
       
+    - uses: actions/checkout@v2
+      
     - name: Render
-      run: blender -b -E CYCLES -f ${{ github.event.inputs.frame }} -F ${{ github.event.inputs.format }} -x 1 -o //render/${{ github.event.inputs.file }} ${{ github.event.inputs.file }}.blend
+      run: blender -b ${{ github.event.inputs.file }}.blend -E CYCLES -f ${{ github.event.inputs.frame }} -F ${{ github.event.inputs.format }} -x 1 -o //render/${{ github.event.inputs.file }}
       
     - name: Upload output file
       uses: actions/upload-artifact@v2
