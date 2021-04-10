@@ -37,7 +37,7 @@ jobs:
         echo "Frame: ${{ github.event.inputs.frame }}"
         echo "Format: ${{ github.event.inputs.format }}"
         echo "File: ${{ github.event.inputs.file }}.blend"
-        echo "Output: ${{ github.event.inputs.file }}.${${{ github.event.inputs.format }},,}"
+        echo "Output: ${{ github.event.inputs.file }}.${github.event.inputs.format,,}"
         
     # Runs a single command using the runners shell
     - name: Install Blender
@@ -50,5 +50,5 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: ${{ github.event.inputs.file }}
-        path: ${{ github.event.inputs.file }}.${${{ github.event.inputs.format }},,}
+        path: ${{ github.event.inputs.file }}.${github.event.inputs.format,,}
       
