@@ -45,8 +45,4 @@ jobs:
       with:
         name: $FILE
         path: $FILE.${$FORMAT,,}
-    
-branding:
-  icon: 'aperture'  
-  color: 'orange'
       
