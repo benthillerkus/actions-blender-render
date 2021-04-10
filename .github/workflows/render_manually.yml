@@ -44,7 +44,7 @@ jobs:
       run: sudo apt install blender
       
     - name: Render
-      run: blender -b -f ${{ github.event.inputs.frame }} -F ${{ github.event.inputs.format }} -x 1 -o //${{ github.event.inputs.file }} ${{ github.event.inputs.file }}.blend
+      run: blender -b -E CYCLES -f ${{ github.event.inputs.frame }} -F ${{ github.event.inputs.format }} -x 1 -o //${{ github.event.inputs.file }} ${{ github.event.inputs.file }}.blend
       
     - name: Upload output file
       uses: actions/upload-artifact@v2
