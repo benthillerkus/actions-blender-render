@@ -11,13 +11,6 @@ on:
       file:
         description: 'The file to render'
         required: true
-      format:
-        # Friendly description to be shown in the UI instead of 'name'
-        description: 'File format'
-        # Default value if no value is explicitly provided
-        default: 'PNG'
-        # Input has to be provided for the workflow to run
-        required: false
       frame:
         description: 'Frame to render'
         default: 1
@@ -41,10 +34,10 @@ jobs:
       run: mkdir render
       
     - name: Render
-      run: blender -b ${{ github.event.inputs.file }}.blend -o //render/frame- -x 1 -E CYCLES -f ${{ github.event.inputs.frame }} -F ${{ github.event.inputs.format }}
+      run: blender -b ${{ github.event.inputs.file }}.blend -o //render/frame- -x 1 -E CYCLES -f ${{ github.event.inputs.frame }} -F PNG
       
     - name: Upload output file
       uses: actions/upload-artifact@v2
       with:
         name: ${{ github.event.inputs.file }}
-        path: render/*.${{ github.event.inputs.format }}
+        path: render/*.png
