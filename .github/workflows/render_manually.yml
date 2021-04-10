@@ -23,9 +23,6 @@ on:
         default: 1
         required: false
 
-env:
-  RENDER: render
-
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "greet"
@@ -48,16 +45,13 @@ jobs:
     - uses: actions/checkout@v2
       with:
         lfs: true
-    
-    - name: Create output dir
-      run: mkdir $RENDER
       
     - name: Render
-      run: blender -b ${{ github.event.inputs.file }}.blend -E CYCLES -f ${{ github.event.inputs.frame }} -F ${{ github.event.inputs.format }} -x 1 -o //$RENDER/${{ github.event.inputs.file }}
+      run: blender -b ${{ github.event.inputs.file }}.blend -E CYCLES -f ${{ github.event.inputs.frame }} -F ${{ github.event.inputs.format }} -x 1
       
     - name: Upload output file
       uses: actions/upload-artifact@v2
       with:
         name: ${{ github.event.inputs.file }}
-        path: $RENDER
+        path: /tmp/
       
