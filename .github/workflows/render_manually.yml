@@ -50,7 +50,7 @@ jobs:
       run: mkdir render
       
     - name: Render
-      run: blender -b -x 1 -o //render/frame-### ${{ github.event.inputs.file }}.blend -E CYCLES -f ${{ github.event.inputs.frame }} -F ${{ github.event.inputs.format }}
+      run: blender -b ${{ github.event.inputs.file }}.blend -o //render/frame- -x 1 -E CYCLES -f ${{ github.event.inputs.frame }} -F ${{ github.event.inputs.format }}
       
     - name: Upload output file
       uses: actions/upload-artifact@v2
