@@ -37,18 +37,17 @@ jobs:
         echo "Frame: ${{ github.event.inputs.frame }}"
         echo "Format: ${{ github.event.inputs.format }}"
         echo "File: ${{ github.event.inputs.file }}.blend"
-        echo "Output: ${{ github.event.inputs.file }}.${github.event.inputs.format,,}"
         
     # Runs a single command using the runners shell
     - name: Install Blender
       run: sudo apt install blender
       
     - name: Render
-      run: blender -b -E CYCLES -f ${{ github.event.inputs.frame }} -F ${{ github.event.inputs.format }} -x 1 -o //${{ github.event.inputs.file }} ${{ github.event.inputs.file }}.blend
+      run: blender -b -E CYCLES -f ${{ github.event.inputs.frame }} -F ${{ github.event.inputs.format }} -x 1 -o //render/${{ github.event.inputs.file }} ${{ github.event.inputs.file }}.blend
       
     - name: Upload output file
       uses: actions/upload-artifact@v2
       with:
         name: ${{ github.event.inputs.file }}
-        path: ${{ github.event.inputs.file }}.${github.event.inputs.format,,}
+        path: render
       
