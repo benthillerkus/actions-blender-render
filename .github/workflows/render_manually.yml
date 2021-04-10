@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
     # Inputs the workflow accepts.
     inputs:
-      file:
+      infile:
         description: 'The file to render'
         required: true
       format:
@@ -33,16 +33,23 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+    - name: Print Config
+      run: |
+        echo $FRAME
+        echo $FORMAT
+        echo $INFILE.blend
+        echo $INFILE.${FORMAT,,}
+        
     # Runs a single command using the runners shell
     - name: Install Blender
       run: sudo apt install blender
       
     - name: Render
-      run: blender -b -f $FRAME -F $FORMAT -x 1 -o //$FILE $FILE.blend
+      run: blender -b -f $FRAME -F $FORMAT -x 1 -o //$INFILE $INFILE.blend
       
     - name: Upload output file
       uses: actions/upload-artifact@v2
       with:
-        name: $FILE
-        path: $FILE.${$FORMAT,,}
+        name: $INFILE
+        path: $INFILE.${$FORMAT,,}
       
