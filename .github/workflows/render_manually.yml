@@ -43,6 +43,8 @@ jobs:
       run: sudo apt install blender
       
     - uses: actions/checkout@v2
+      with:
+        lfs: true
       
     - name: Render
       run: blender -b ${{ github.event.inputs.file }}.blend -E CYCLES -f ${{ github.event.inputs.frame }} -F ${{ github.event.inputs.format }} -x 1 -o //render/${{ github.event.inputs.file }}
