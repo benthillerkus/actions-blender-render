@@ -38,7 +38,7 @@ jobs:
       run: sudo apt install blender
       
     - name: Render
-      run: blender -b -f $FRAME -F $FORMAT -x 1 -o //$FILE $FILE
+      run: blender -b -f $FRAME -F $FORMAT -x 1 -o //$FILE $FILE.blend
       
     - name: Upload output file
       uses: actions/upload-artifact@v2
